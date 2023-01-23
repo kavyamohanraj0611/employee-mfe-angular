@@ -1,0 +1,48 @@
+{
+  "employee": [
+    {
+      "id": "105",
+      "employeeName": "Abbu",
+      "employeeDepartment": "Testing",
+      "employeeEmail": "abbu@gmail.com",
+      "employeePhoneNumber": 9287382383
+    },
+    {
+      "id": "102",
+      "employeeName": "Aryan",
+      "employeeDepartment": "Testing",
+      "employeeEmail": "aryan@gmail.com",
+      "employeePhoneNumber": 9737325883
+    },
+    {
+      "id": "101",
+      "employeeName": "Ajith",
+      "employeeDepartment": "Accounts",
+      "employeeEmail": "ajith@gmail.com",
+      "employeePhoneNumber": 9568273846
+    },
+    {
+      "id": "123",
+      "employeeName": "Bala",
+      "employeeDepartment": "Testing",
+      "employeeEmail": "bala@gmail.com",
+      "employeePhoneNumber": 9568293646
+    },
+    {
+      "id": "ABC123",
+      "employeeName": "Banu",
+      "employeeDepartment": "Testing",
+      "employeeEmail": "banu@gmail.com",
+      "employeePhoneNumber": 9569863646
+    }
+  ],
+  "project": [
+    {
+      "id": "739",
+      "employeeName": "Bala",
+      "projectName": "e-kart",
+      "projectDescription": "shopping application",
+      "managerName": "john"
+    }
+  ]
+}

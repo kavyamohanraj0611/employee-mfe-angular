@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { BasicDetailsService } from '../basic-details.service';
 
 @Component({
   selector: 'app-basic-details',
@@ -9,9 +11,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class BasicDetailsComponent {
   employeeForm:FormGroup|any
 
-  constructor(private formBuilder:FormBuilder) { 
+  constructor(private formBuilder:FormBuilder,private basicDetailService:BasicDetailsService,private toastr:ToastrService) { 
     this.employeeForm = this.formBuilder.group({
-      employeeId:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z0-9]{1,10}$')]),
+      id:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z0-9]{1,10}$')]),
       employeeName:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z ]{1,15}$')]),
       employeeDepartment:new FormControl('',[Validators.required]),
       employeeEmail:new FormControl('',[Validators.required,Validators.pattern('^[a-z0-9\.]{4,18}@[a-z]+\.[a-z\.]{2,6}$')]),
@@ -22,11 +24,17 @@ export class BasicDetailsComponent {
   }
 
   register(employeeForm:FormGroup){
-   console.log("Form ",employeeForm.value);     
+   console.log("Form ",employeeForm.value);
+    this.basicDetailService.addEmployeeBasic(employeeForm.value)
+      .subscribe(data => {
+        console.log("Data ",data)
+        this.toastr.success('Success', 'Employee basic details has been saved');
+        employeeForm.reset()
+      })      
   }
 
-  get employeeId(){
-    return this.employeeForm.get('employeeId')
+  get id(){
+    return this.employeeForm.get('id')
   }
   get employeeName(){
     return this.employeeForm.get('employeeName')

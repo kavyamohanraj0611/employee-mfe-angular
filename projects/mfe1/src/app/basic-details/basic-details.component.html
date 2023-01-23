@@ -5,11 +5,11 @@
         </div>
         <div class="mb-3">
             <label class="mb-2"><b>Employee Id*</b></label>
-            <input class="form-control" type="text" id="employeeId" name="employeeId" formControlName="employeeId"
+            <input class="form-control" type="text" id="id" name="id" formControlName="id"
                 placeholder="Enter employee Id">
-            <span *ngIf="employeeId.hasError('required') && employeeId.touched" class="text-danger"><small>Employee Id is
+            <span *ngIf="id.hasError('required') && id.touched" class="text-danger"><small>Employee Id is
                     required</small></span>
-            <span *ngIf="employeeId.hasError('pattern')" class="text-danger"><small>Employee Id must contain
+            <span *ngIf="id.hasError('pattern')" class="text-danger"><small>Employee Id must contain
                     only alphabets and numbers</small></span>
         </div>
         <div class="mb-3">
@@ -40,7 +40,7 @@
         </div>
         <div class="mb-3">
             <label class="mb-2"><b>Phone Number*</b></label>
-            <input class="form-control" type="employeeEmail" id="employeePhoneNumber" formControlName="employeePhoneNumber"
+            <input class="form-control" type="number" id="employeePhoneNumber" formControlName="employeePhoneNumber"
                 placeholder="Enter employee phone number">
             <span *ngIf="employeePhoneNumber.hasError('required') && employeePhoneNumber.touched" class="text-danger"><small>Phone
                     number is required</small></span>
