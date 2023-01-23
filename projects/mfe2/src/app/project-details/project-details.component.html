@@ -1,0 +1,47 @@
+<div class="container border border-2 p-2 mt-5">
+    <form [formGroup]="employeeProjectForm">
+        <div class="text-center mb-2">
+            <span class="fs-3">Employee Project Details Form</span>
+        </div>
+        <div class="mb-3">
+            <label class="mb-2"><b>Employee Id*</b></label>
+            <input type="text" class="form-control" id="employeeId" name="employeeId" formControlName="employeeId"
+                placeholder="Enter employee Id">
+            <span *ngIf="employeeId.hasError('required') && employeeId.touched" class="text-danger"><small>Employee Id is
+                    required</small></span>
+            <span *ngIf="employeeId.hasError('pattern')" class="text-danger"><small>Employee Id must contain
+                    only alphabets and numbers</small></span>
+        </div>
+        <div class="mb-3">
+            <label class="mb-2"><b>Name*</b></label>
+            <input type="text" class="form-control" id="employeeName" formControlName="employeeName" placeholder="Enter employee full name">
+            <span *ngIf="employeeName.hasError('required') && employeeName.touched" class="text-danger"><small>Employee name is
+                    required</small></span>
+            <span *ngIf="employeeName.hasError('pattern')" class="text-danger"><small>Name must contain only alphabets</small></span>
+        </div>
+        <div class="mb-3">
+            <label class="mb-2"><b>Project Name*</b></label>
+            <input type="text" class="form-control" id="projectName" formControlName="projectName" placeholder="Enter project name">
+            <span *ngIf="projectName.hasError('required') && projectName.touched" class="text-danger"><small>Project name is required</small></span>
+            <span *ngIf="projectName.hasError('pattern')" class="text-danger"><small>Project Name must contain only alphabets</small></span>
+        </div>
+        <div class="mb-3">
+            <label class="mb-2"><b>Project Description*</b></label>
+            <textarea type="text" class="form-control" id="projectDescription" formControlName="projectDescription"
+                placeholder="Enter employee email"></textarea>
+            <span *ngIf="projectDescription.hasError('required') && projectDescription.touched" class="text-danger"><small>Project description is required</small></span>
+            <span *ngIf="projectDescription.hasError('minlength')" class="text-danger"><small>Description must be minimum of 5 characters</small></span>
+            <span *ngIf="projectDescription.hasError('maxlength')" class="text-danger"><small>Description should not exceed 200 characters</small></span>
+        </div>
+        <div class="mb-3">
+            <label class="mb-2"><b>Manager Name*</b></label>
+            <input type="text" class="form-control" id="managerName" formControlName="managerName" placeholder="Enter manager name">
+            <span *ngIf="managerName.hasError('required') && managerName.touched" class="text-danger"><small>Manager name is
+                    required</small></span>
+            <span *ngIf="managerName.hasError('pattern')" class="text-danger"><small>Name must only contains alphabets</small></span>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary mt-3" (click)="register(employeeProjectForm)" [disabled]="employeeProjectForm.invalid">Submit</button>
+        </div>
+    </form>
+</div>
