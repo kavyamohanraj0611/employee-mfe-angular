@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark text-white p-3">
+    <a class="navbar-brand text-warning bg-gradient-dark fs-4" href="#">Employee Management</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/basic" [routerLinkActive]="['active']">View Basic Details</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/project" [routerLinkActive]="['active']">View Project Details</a>
+        </li>
+      </ul>
+    </div>
+        <span class="nav-item float-end  me-3">
+            <span class="fs-6 m-3">Hi, User</span>
+            <i class="bi bi-person-circle text-white fs-2"></i>
+        </span>
+  </nav>

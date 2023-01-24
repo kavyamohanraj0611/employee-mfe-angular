@@ -34,6 +34,13 @@
       "employeeDepartment": "Testing",
       "employeeEmail": "banu@gmail.com",
       "employeePhoneNumber": 9569863646
+    },
+    {
+      "id": "63894",
+      "employeeName": "Siva",
+      "employeeDepartment": "Development",
+      "employeeEmail": "siva@gmail.com",
+      "employeePhoneNumber": 9568273846
     }
   ],
   "project": [
@@ -43,6 +50,27 @@
       "projectName": "e-kart",
       "projectDescription": "shopping application",
       "managerName": "john"
+    },
+    {
+      "id": "030",
+      "employeeName": "Siva",
+      "projectName": "Elearning",
+      "projectDescription": "Elearning",
+      "managerName": "Jack"
+    },
+    {
+      "id": "0301",
+      "employeeName": "Sree",
+      "projectName": "google",
+      "projectDescription": "Documentation and examples for optin styling of tables given their prevalent use in JavaScript plugins with Bootstrap",
+      "managerName": "Jack"
+    },
+    {
+      "id": "123n",
+      "employeeName": "Balan",
+      "projectName": "hugyjkm",
+      "projectDescription": "mmkkmn",
+      "managerName": "gwduk"
     }
   ]
 }

@@ -1,0 +1,30 @@
+<div class="mt-5 w-75 text-center container">
+    <form class="float-start" [formGroup]="filterForm">
+        <label class="me-2">Department : </label>
+        <select id="dept" formControlName="dept" (change)="filter()">
+            <option value="">Select an option</option>
+            <option value="Development">Development</option>
+            <option value="Testing">Testing</option>
+            <option value="Accounts">Accounts</option>
+            <option value="Sales">Sales</option>
+        </select>
+    </form>
+    <div class="float-end my-3">
+        <button type="button" class="btn btn-success " routerLink="/basic/form1">Add Basic Detail</button>
+    </div>
+    <table class="table table-striped table-hover bg-gradient fs-">
+        <thead class="text-uppercase">
+            <tr class="table bg-secondary text-white fs-4 bg-gradient m-2 t-head">
+                <th colspan="7"><span>Basic Details</span></th>
+            </tr>
+            <tr>           
+              <th *ngFor="let data of header | keyvalue">{{(data.key)}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of details ; let i = index"> 
+              <td *ngFor="let data of item | keyvalue">{{data.value}}</td>
+            </tr>
+          </tbody>
+    </table>
+</div>

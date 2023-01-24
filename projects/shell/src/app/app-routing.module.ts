@@ -4,11 +4,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  // {
-  //   path:'',
-  //   component:HomeComponent,
-  //   pathMatch:'full'
-  // },
+  {
+    path:'',
+    redirectTo:'home',
+    pathMatch:'full'
+  },
+  {
+    path:'home',
+    component:HomeComponent,
+    pathMatch:'full'
+  },
   {
     path: 'basic',
     loadChildren: () => loadRemoteModule({
@@ -16,16 +21,16 @@ const routes: Routes = [
       remoteEntry: "http://localhost:4300/remoteEntry.js",
       exposedModule: './Module'
     })
-      .then((m) => m.BasicdetailsModule)
+    .then((m) => m.BasicdetailsModule),
   },
   {
     path: "project",
-    loadChildren: () =>
-      loadRemoteModule({
+    loadChildren: () => loadRemoteModule({
         type: 'module',
         remoteEntry: "http://localhost:4400/remoteEntry.js",
         exposedModule: './Module',
-      }).then((m) => m.ProjectDetailModule),
+      })
+      .then((m) => m.ProjectDetailModule),
   }
 ];
 

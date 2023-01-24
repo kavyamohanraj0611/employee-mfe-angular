@@ -6,8 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BasicDetailsComponent } from '../basic-details/basic-details.component';
 import { HttpClientModule } from '@angular/common/http'
 import { BasicDetailsService } from '../basic-details.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -17,14 +15,7 @@ import { ToastrModule } from 'ngx-toastr';
     CommonModule,
     BasicdetailsRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot({
-      timeOut: 3000,
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true,
-      progressBar:true
-    })
+    HttpClientModule
   ],
   providers: [BasicDetailsService]
 })

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import { BasicDetailsService } from '../basic-details.service';
 
 @Component({
@@ -11,7 +10,7 @@ import { BasicDetailsService } from '../basic-details.service';
 export class BasicDetailsComponent {
   employeeForm:FormGroup|any
 
-  constructor(private formBuilder:FormBuilder,private basicDetailService:BasicDetailsService,private toastr:ToastrService) { 
+  constructor(private formBuilder:FormBuilder,private basicDetailService:BasicDetailsService) { 
     this.employeeForm = this.formBuilder.group({
       id:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z0-9]{1,10}$')]),
       employeeName:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z ]{1,15}$')]),
@@ -28,7 +27,6 @@ export class BasicDetailsComponent {
     this.basicDetailService.addEmployeeBasic(employeeForm.value)
       .subscribe(data => {
         console.log("Data ",data)
-        this.toastr.success('Success', 'Employee basic details has been saved');
         employeeForm.reset()
       })      
   }

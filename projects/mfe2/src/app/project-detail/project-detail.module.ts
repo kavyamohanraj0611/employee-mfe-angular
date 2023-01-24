@@ -6,20 +6,18 @@ import { ProjectDetailsComponent } from '../project-details/project-details.comp
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProjectDetailsService } from '../project-details.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { ToastrModule } from 'ngx-toastr';
+import { TableComponent } from '../table/table.component';
 
 @NgModule({
   declarations: [
-    ProjectDetailsComponent
+    ProjectDetailsComponent,
+    TableComponent
   ],
   imports: [
     CommonModule,
     ProjectDetailRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    HttpClientModule
   ],
   providers:[ProjectDetailsService]
 })

@@ -1,40 +1,54 @@
+<div class="float-start m-3">
+    <button type="button" class="btn btn-success " routerLink="/basic/details">View Basic Detail</button>
+</div>
 <div class="container border border-2 p-2 mt-5">
     <form [formGroup]="employeeForm">
         <div class="text-center mb-2">
-            <span class="fs-3">Employee Basic Details Form</span>
+            <span class="fs-3">Basic Details Form</span>
         </div>
         <div class="mb-3">
             <label class="mb-2"><b>Employee Id*</b></label>
             <input class="form-control" type="text" id="id" name="id" formControlName="id"
                 placeholder="Enter employee Id">
-            <span *ngIf="id.hasError('required') && id.touched" class="text-danger"><small>Employee Id is
-                    required</small></span>
-            <span *ngIf="id.hasError('pattern')" class="text-danger"><small>Employee Id must contain
-                    only alphabets and numbers</small></span>
+            <div
+                *ngIf="employeeForm.controls['id'].invalid && (employeeForm.controls['id'].dirty || employeeForm.controls['id'].touched)">
+                <span *ngIf="employeeForm.controls['id'].errors.required"><small class="text-danger">Employee Id is
+                        required</small></span>
+                <span *ngIf="employeeForm.controls['id'].errors.pattern"><small class="text-danger">Employee Id must
+                        contain only alphabets and numbers</small></span>
+            </div>
         </div>
         <div class="mb-3">
             <label class="mb-2"><b>Name*</b></label>
-            <input class="form-control" type="text" id="employeeName" formControlName="employeeName" placeholder="Enter employee full name">
-            <span *ngIf="employeeName.hasError('required') && employeeName.touched" class="text-danger"><small>Employee name is
+            <input class="form-control" type="text" id="employeeName" formControlName="employeeName"
+                placeholder="Enter employee full name">
+            <span
+            *ngIf="employeeForm.get('employeeName')?.hasError('required') && employeeForm.get('employeeName')?.touched"
+                class="text-danger"><small>Employee name is
                     required</small></span>
-            <span *ngIf="employeeName.hasError('pattern')" class="text-danger"><small>Name must contain only alphabets</small></span>
+            <span *ngIf="employeeForm.get('employeeName')?.hasError('pattern') && employeeForm.get('employeeName')?.touched"
+                class="text-danger"><small>Name must contain only alphabets</small></span>
         </div>
         <div class="mb-3">
             <label class="mb-2"><b>Department*</b></label>
-            <select class="form-control" formControlName="employeeDepartment" id="employeeDepartment" name="employeeDepartment">
+            <select class="form-control" formControlName="employeeDepartment" id="employeeDepartment"
+                name="employeeDepartment">
                 <option value="">Select the Department</option>
                 <option value="Accounts">Accounts</option>
                 <option value="Development">Development</option>
                 <option value="Testing">Testing</option>
                 <option value="Sales">Sales</option>
             </select>
-            <span *ngIf="employeeDepartment.hasError('required') && employeeDepartment.touched" class="text-danger"><small>Department is
+            <span *ngIf="employeeDepartment.hasError('required') && employeeDepartment.touched"
+                class="text-danger"><small>Department is
                     required</small></span>
         </div>
         <div class="mb-3">
             <label class="mb-2"><b>Email*</b></label>
-            <input class="form-control" type="text" id="employeeEmail" formControlName="employeeEmail" placeholder="Enter employee email">
-            <span *ngIf="employeeEmail.hasError('required') && employeeEmail.touched" class="text-danger"><small>Email is
+            <input class="form-control" type="text" id="employeeEmail" formControlName="employeeEmail"
+                placeholder="Enter employee email">
+            <span *ngIf="employeeEmail.hasError('required') && employeeEmail.touched" class="text-danger"><small>Email
+                    is
                     required</small></span>
             <span *ngIf="employeeEmail.hasError('pattern')" class="text-danger"><small>Invalid Email</small></span>
         </div>
@@ -42,12 +56,15 @@
             <label class="mb-2"><b>Phone Number*</b></label>
             <input class="form-control" type="number" id="employeePhoneNumber" formControlName="employeePhoneNumber"
                 placeholder="Enter employee phone number">
-            <span *ngIf="employeePhoneNumber.hasError('required') && employeePhoneNumber.touched" class="text-danger"><small>Phone
+            <span *ngIf="employeePhoneNumber.hasError('required') && employeePhoneNumber.touched"
+                class="text-danger"><small>Phone
                     number is required</small></span>
-            <span *ngIf="employeeEmail.hasError('pattern')" class="text-danger"><small>Invalid phone number</small></span>
+            <span *ngIf="employeeEmail.hasError('pattern')" class="text-danger"><small>Invalid phone
+                    number</small></span>
         </div>
         <div class="text-center">
-            <button type="submit" class="btn btn-primary mt-3" (click)="register(employeeForm)" [disabled]="employeeForm.invalid">Submit</button>
+            <button type="submit" class="btn btn-primary mt-3" (click)="register(employeeForm)"
+                [disabled]="employeeForm.invalid">Submit</button>
         </div>
     </form>
 </div>
