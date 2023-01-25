@@ -20,6 +20,6 @@ export class BasicDetailsService {
 
   getEmployeeBasic(): Observable<employeeBasic[]> {
     console.log('getEmployee '+this.baseURL + 'employee')
-    return this.http.get<employeeBasic[]>(this.baseURL + 'employee')
+    return this.http.get<employeeBasic[]>(this.baseURL + 'employee').pipe()
   }
 }

@@ -5,7 +5,10 @@ import { BasicdetailsRoutingModule } from './basicdetails-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BasicDetailsComponent } from '../basic-details/basic-details.component';
 import { HttpClientModule } from '@angular/common/http'
-import { BasicDetailsService } from '../basic-details.service';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { basicDetailReducer } from '../state/basic.reducer';
+import { basicDetailsEffect } from '../state/basic.effect';
 
 @NgModule({
   declarations: [
@@ -15,8 +18,10 @@ import { BasicDetailsService } from '../basic-details.service';
     CommonModule,
     BasicdetailsRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forFeature('basicDetails',basicDetailReducer),
+    EffectsModule.forFeature([basicDetailsEffect]),
   ],
-  providers: [BasicDetailsService]
+  providers:[]
 })
 export class BasicdetailsModule { }

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { BasicDetailsService } from '../basic-details.service';
+import { addBasicDetails, loadBasicDetails } from '../state/basic.action';
+
 
 @Component({
   selector: 'app-basic-details',
@@ -10,7 +13,7 @@ import { BasicDetailsService } from '../basic-details.service';
 export class BasicDetailsComponent {
   employeeForm:FormGroup|any
 
-  constructor(private formBuilder:FormBuilder,private basicDetailService:BasicDetailsService) { 
+  constructor(private formBuilder:FormBuilder,private basicDetailService:BasicDetailsService, private store:Store) { 
     this.employeeForm = this.formBuilder.group({
       id:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z0-9]{1,10}$')]),
       employeeName:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z ]{1,15}$')]),
@@ -19,16 +22,18 @@ export class BasicDetailsComponent {
       employeePhoneNumber:new FormControl('',[Validators.required,Validators.pattern('^[6-9]{1}[0-9]{9}$')])
     });
   }
-  ngOnInit(): void {
+  ngOnInit(): void {    
+    this.store.dispatch(loadBasicDetails())
   }
 
   register(employeeForm:FormGroup){
    console.log("Form ",employeeForm.value);
-    this.basicDetailService.addEmployeeBasic(employeeForm.value)
-      .subscribe(data => {
-        console.log("Data ",data)
-        employeeForm.reset()
-      })      
+    // this.basicDetailService.addEmployeeBasic(employeeForm.value)
+    //   .subscribe(data => {
+    //     console.log("Data ",data)
+    //     employeeForm.reset()
+    //   }) 
+      this.store.dispatch(addBasicDetails(employeeForm.value));
   }
 
   get id(){
