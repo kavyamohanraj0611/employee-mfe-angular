@@ -72,5 +72,19 @@
       "projectDescription": "mmkkmn",
       "managerName": "gwduk"
     }
+  ],
+  "users":[
+    {
+      "userEmail":"abbu@gmail.com",
+      "password":"1234"
+    },
+    {
+      "userEmail":"bala@gmail.com",
+      "password":"test123"
+    },
+    {
+      "userEmail":"john@gmail.com",
+      "password":"john@123"
+    }
   ]
 }

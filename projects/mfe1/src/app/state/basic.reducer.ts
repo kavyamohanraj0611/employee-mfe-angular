@@ -1,19 +1,23 @@
 import { createReducer } from "@ngrx/store";
 import { on } from "@ngrx/store";
 
-import { addBasicDetails, loadBasicDetails, loadBasicDetails_success } from "./basic.action";
+import { addBasicDetails, loadBasicDetails, loadBasicDetails_failure, loadBasicDetails_success } from "./basic.action";
 import { employeeBasic } from "../employee-basic-model";
 
 export interface BasicDetailState {
-    basicDetails:employeeBasic[];
-    error:string;
-    status:'pending' | 'loading' | 'error' | 'success';
+    id:string;
+    employeeName:string;
+    employeeDepartment:string;
+    employeeEmail:string;
+    employeePhoneNumber:number;
 }
 
 export const initialState: BasicDetailState = {
-    basicDetails:[],
-    error:'',
-    status:'pending'
+    id:'',
+    employeeName:'',
+    employeeDepartment:'',
+    employeeEmail:'',
+    employeePhoneNumber:0
  }
 
 export const basicDetailReducer = createReducer(
@@ -21,14 +25,16 @@ export const basicDetailReducer = createReducer(
     on(addBasicDetails, (state, {id,employeeName,employeeDepartment,employeeEmail,employeePhoneNumber}) => {
         console.log("reducer state",state)
         console.log("reducer action")
-        return {
-            ...state,
-            basicDetails:[{id,employeeName,employeeDepartment,employeeEmail,employeePhoneNumber}]
+        return {    
+            id:id,
+            employeeName:employeeName,
+            employeeDepartment:employeeDepartment,
+            employeeEmail:employeeEmail,
+            employeePhoneNumber:employeePhoneNumber
         }
     }),
     on(loadBasicDetails,(state)=>{
         console.log("Load ",state);
-
         return {
             ...state,
             status:'loading'
@@ -36,19 +42,14 @@ export const basicDetailReducer = createReducer(
     }),
     on(loadBasicDetails_success,(state,{basicDetails})=>{
         console.log("Success ",basicDetails);
-        
         return {
             ...state,
-            basicDetails:basicDetails,
-            error:'',
-            status:'success'
+            basicDetails
         }
     }),
-    on(loadBasicDetails,(state)=>{
+    on(loadBasicDetails_failure,(state)=>{
         return {
             ...state,
-            error:'Error',
-            status:'error'
         }
     })
 );

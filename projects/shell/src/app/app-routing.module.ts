@@ -31,6 +31,15 @@ const routes: Routes = [
         exposedModule: './Module',
       })
       .then((m) => m.ProjectDetailModule),
+  },
+  {
+    path: "login",
+    loadChildren: () => loadRemoteModule({
+        type: 'module',
+        remoteEntry: "http://localhost:4500/remoteEntry.js",
+        exposedModule: './Module',
+      })
+      .then((m) => m.LoginModule),
   }
 ];
 

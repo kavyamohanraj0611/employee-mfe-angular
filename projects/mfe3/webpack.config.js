@@ -10,7 +10,7 @@ sharedMappings.register(
 
 module.exports = {
   output: {
-    uniqueName: "mfe1",
+    uniqueName: "mfe3",
     publicPath: "auto"
   },
   optimization: {
@@ -29,16 +29,17 @@ module.exports = {
         library: { type: "module" },
 
         // For remotes (please adjust)
-        name: "mfe1",
+        name: "mfe3",
         filename: "remoteEntry.js",
         exposes: {
-            './Module': './projects/mfe1/src/app/basicdetails/basicdetails.module.ts',
+            './Module': './projects/mfe3/src/app/login/login.module.ts',
         },        
         
         // For hosts (please adjust)
         // remotes: {
-        //     "employeeMfe": "http://localhost:4200/remoteEntry.js",
         //     "shell": "http://localhost:4200/remoteEntry.js",
+        //     "mfe1": "http://localhost:4300/remoteEntry.js",
+        //     "mfe2": "http://localhost:4400/remoteEntry.js",
 
         // },
 
@@ -47,8 +48,6 @@ module.exports = {
           "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
           "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
           "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-          "@ngrx/store": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-          "@ngrx/effects": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
 
           ...sharedMappings.getDescriptors()
         })

@@ -28,7 +28,7 @@ import { ReducerManagerDispatcher } from '@ngrx/store';
     ReactiveFormsModule,
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
-      maxAge:25,
+      maxAge:25, 
       logOnly:environment.production
     }),
     EffectsModule.forRoot([]),

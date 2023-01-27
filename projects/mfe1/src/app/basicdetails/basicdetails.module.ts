@@ -16,7 +16,7 @@ import { basicDetailsEffect } from '../state/basic.effect';
   ],
   imports: [
     CommonModule,
-    BasicdetailsRoutingModule,
+    BasicdetailsRoutingModule, 
     ReactiveFormsModule,
     HttpClientModule,
     StoreModule.forFeature('basicDetails',basicDetailReducer),

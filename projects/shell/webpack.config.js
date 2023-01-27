@@ -2,6 +2,7 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const mf = require("@angular-architects/module-federation/webpack");
 const path = require("path");
 const share = mf.share;
+const shareAll=mf.shareAll
 
 const sharedMappings = new mf.SharedMappings();
 sharedMappings.register(
@@ -39,16 +40,26 @@ module.exports = {
         remotes: {
             "mfe1": "http://localhost:4300/remoteEntry.js",
             "mfe2": "http://localhost:4400/remoteEntry.js",
+            "mfe3": "http://localhost:4500/remoteEntry.js",
         },
 
-        shared: share({
-          "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
-          "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
-          "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
-          "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-
+        shared: {
+          ...shareAll({
+            singleton: true,
+            strictVersion: true,
+            requiredVersion: 'auto',
+            eager: true
+          }),
           ...sharedMappings.getDescriptors()
-        })
+        },
+        // shared: share({
+        //   "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
+        //   "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
+        //   "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
+        //   "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+
+        //   ...sharedMappings.getDescriptors()
+        // })
         
     }),
     sharedMappings.getPlugin()

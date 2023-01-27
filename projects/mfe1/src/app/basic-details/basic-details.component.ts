@@ -23,7 +23,6 @@ export class BasicDetailsComponent {
     });
   }
   ngOnInit(): void {    
-    this.store.dispatch(loadBasicDetails())
   }
 
   register(employeeForm:FormGroup){
