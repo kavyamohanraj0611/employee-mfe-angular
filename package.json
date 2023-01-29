@@ -26,7 +26,8 @@
     "@ngrx/router-store": "^15.1.0",
     "@ngrx/store": "^15.1.0",
     "@ngrx/store-devtools": "^15.1.0",
-    "ngx-toastr": "^16.0.2",
+    "ngx-pagination": "^6.0.3",
+    "ngx-toastr": "^15.2.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

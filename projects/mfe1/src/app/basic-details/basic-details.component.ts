@@ -32,7 +32,7 @@ export class BasicDetailsComponent {
     //     console.log("Data ",data)
     //     employeeForm.reset()
     //   }) 
-      this.store.dispatch(addBasicDetails(employeeForm.value));
+      this.store.dispatch(addBasicDetails(employeeForm.value))
   }
 
   get id(){

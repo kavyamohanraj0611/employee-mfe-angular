@@ -41,6 +41,34 @@
       "employeeDepartment": "Development",
       "employeeEmail": "siva@gmail.com",
       "employeePhoneNumber": 9568273846
+    },
+    {
+      "id": "739i",
+      "employeeName": "Harini",
+      "employeeDepartment": "Sales",
+      "employeeEmail": "harini@gmail.com",
+      "employeePhoneNumber": 9568273846
+    },
+    {
+      "id": "738e",
+      "employeeName": "Balae",
+      "employeeDepartment": "Development",
+      "employeeEmail": "harini@gmail.com",
+      "employeePhoneNumber": 9568273846
+    },
+    {
+      "id": "1298",
+      "employeeName": "Nithish",
+      "employeeDepartment": "Accounts",
+      "employeeEmail": "nithish@gmail.com",
+      "employeePhoneNumber": 9568273846
+    },
+    {
+      "id": "w99e",
+      "employeeName": "Vijay",
+      "employeeDepartment": "Testing",
+      "employeeEmail": "vijay@gmail.com",
+      "employeePhoneNumber": 9568273846
     }
   ],
   "project": [
@@ -71,20 +99,40 @@
       "projectName": "hugyjkm",
       "projectDescription": "mmkkmn",
       "managerName": "gwduk"
+    },
+    {
+      "id": "6374",
+      "employeeName": "Kumar",
+      "projectName": "Student management",
+      "projectDescription": "Student management application",
+      "managerName": "Abc"
+    },
+    {
+      "id": "8374",
+      "employeeName": "Johan",
+      "projectName": "Order Food",
+      "projectDescription": "Food delivery application",
+      "managerName": "Britto"
     }
   ],
-  "users":[
+  "users": [
     {
-      "userEmail":"abbu@gmail.com",
-      "password":"1234"
+      "id": 521767,
+      "name": "abbu",
+      "email": "abbu@gmail.com",
+      "password": "12345678"
     },
     {
-      "userEmail":"bala@gmail.com",
-      "password":"test123"
+      "id": 488058,
+      "name": "harini",
+      "email": "harini@gmail.com",
+      "password": "12345678"
     },
     {
-      "userEmail":"john@gmail.com",
-      "password":"john@123"
+      "id": 920663,
+      "name": "Kavya",
+      "email": "kavya@gmail.com",
+      "password": "12345678"
     }
   ]
 }

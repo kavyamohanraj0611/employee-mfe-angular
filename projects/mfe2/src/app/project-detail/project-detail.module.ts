@@ -7,6 +7,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProjectDetailsService } from '../project-details.service';
 import { TableComponent } from '../table/table.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { StoreModule } from '@ngrx/store';
+import { projectDetailReducer } from '../state/project.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { projectDetailsEffect } from '../state/project.effects';
 
 @NgModule({
   declarations: [
@@ -17,7 +22,10 @@ import { TableComponent } from '../table/table.component';
     CommonModule,
     ProjectDetailRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule,
+    StoreModule.forFeature('projectDetails',projectDetailReducer),
+    EffectsModule.forFeature([projectDetailsEffect])
   ],
   providers:[ProjectDetailsService]
 })

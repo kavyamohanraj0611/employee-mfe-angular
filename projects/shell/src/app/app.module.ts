@@ -11,6 +11,8 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { environment } from '../environments/environment';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +29,8 @@ import { environment } from '../environments/environment';
       maxAge:25,
       logOnly:environment.production
     }),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

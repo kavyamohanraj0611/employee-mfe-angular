@@ -1,6 +1,7 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthService } from 'projects/auth/src/public-api';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
       exposedModule: './Module'
     })
     .then((m) => m.BasicdetailsModule),
+    canActivate:[AuthService]
   },
   {
     path: "project",
@@ -31,6 +33,7 @@ const routes: Routes = [
         exposedModule: './Module',
       })
       .then((m) => m.ProjectDetailModule),
+      canActivate:[AuthService]
   },
   {
     path: "login",
@@ -40,7 +43,8 @@ const routes: Routes = [
         exposedModule: './Module',
       })
       .then((m) => m.LoginModule),
-  }
+  },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

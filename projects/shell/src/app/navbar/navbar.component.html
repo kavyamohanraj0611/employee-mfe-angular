@@ -1,22 +1,30 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark text-white p-3">
-    <a class="navbar-brand text-warning bg-gradient-dark fs-4" href="#">Employee Management</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse " id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/basic" [routerLinkActive]="['active']">View Basic Details</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/project" [routerLinkActive]="['active']">View Project Details</a>
-        </li>
-      </ul>
-    </div>
-        <span class="nav-item float-end  me-3">
-            <span class="fs-6 m-3">Hi, User</span>
-            <a routerLink="/login">
-              <i class="bi bi-person-circle text-white fs-2"></i>
-            </a>
-        </span>
-  </nav>
+  <a class="navbar-brand text-warning bg-gradient-dark fs-4" href="#">Employee Management</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse " id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/basic" [routerLinkActive]="['active']">View Basic Details</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/project" [routerLinkActive]="['active']">View Project Details</a>
+      </li>
+    </ul>
+  </div>
+  <span *ngIf="loggedIn" class="nav-item float-end  me-2">
+    <span class="me-2 fs-5">Hi, {{userName | titlecase}}</span><br>
+    <small>
+      <a (click)="logout()" class="text-decoration-none text-white me-3" style="cursor: pointer;"><span class="me-3">Logout</span>
+      </a>
+    </small>
+  </span>
+  <span *ngIf="!loggedIn" class="nav-item float-end ">
+    <a routerLink="/login" class="text-decoration-none text-white border border-white rounded p-2 me-3" style="cursor: pointer;"><span class="">Login</span>
+    </a>
+  </span>
+  <i *ngIf="loggedIn" class="bi bi-person-circle text-white fs-1 me-4"></i><br>
+
+</nav>

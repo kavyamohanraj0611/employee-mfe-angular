@@ -9,6 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { basicDetailReducer } from '../state/basic.reducer';
 import { basicDetailsEffect } from '../state/basic.effect';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { basicDetailsEffect } from '../state/basic.effect';
     HttpClientModule,
     StoreModule.forFeature('basicDetails',basicDetailReducer),
     EffectsModule.forFeature([basicDetailsEffect]),
+    NgxPaginationModule
   ],
   providers:[]
 })

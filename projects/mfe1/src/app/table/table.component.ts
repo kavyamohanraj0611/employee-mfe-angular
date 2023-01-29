@@ -15,8 +15,10 @@ export class TableComponent implements OnInit {
 
   details!: employeeBasic[];
   header: any;
-  filterForm!: FormGroup
-  constructor(private basicDetailService: BasicDetailsService,private store:Store) {
+  filterForm!: FormGroup;
+  page:any;
+  maxSize:number=2
+  constructor(private store:Store) {
     this.filterForm = new FormGroup({
       dept: new FormControl('')
     })
@@ -35,8 +37,8 @@ export class TableComponent implements OnInit {
       this.store.select(getAllBasicDetailState).subscribe((data)=>{
         console.log("Dataaaa ",data);
         this.details = data.basicDetails
+        if(this.details)
         this.header = this.details[0];
-        
       })
       
   }
@@ -44,15 +46,28 @@ export class TableComponent implements OnInit {
   filter() {
     console.log("Inn", this.filterForm.get("dept")?.value);
     const value = this.filterForm.get("dept")?.value
-      this.basicDetailService.getEmployeeBasic()
-      .subscribe(data => {
-        console.log("Data ", data)
-        this.details = data;
+
+    this.store.dispatch(loadBasicDetails())
+      this.store.select(getAllBasicDetailState).subscribe((data)=>{
+        console.log("Dataaaa ",data);
+        this.details = data.basicDetails
+        if(this.details)
         this.header = this.details[0];
         if(value)
         this.details = this.details.filter((data) => value === data.employeeDepartment)
         console.log("Details ", this.details);
       })
+
+
+      // this.basicDetailService.getEmployeeBasic()
+      // .subscribe(data => {
+      //   console.log("Data ", data)
+      //   this.details = data;
+      //   this.header = this.details[0];
+      //   if(value)
+      //   this.details = this.details.filter((data) => value === data.employeeDepartment)
+      //   console.log("Details ", this.details);
+      // })
     
   }
 

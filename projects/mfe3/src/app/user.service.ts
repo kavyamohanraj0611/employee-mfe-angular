@@ -12,10 +12,19 @@ export class UserService {
 
   constructor(private http:HttpClient) { }
 
-  loginUser(login:Login):Observable<any>{
+  loginUser(email:String,password:String):Observable<any>{
     const headers = { 'content-type': 'application/json'}  
-    const body=JSON.stringify(login);
+    const body=JSON.stringify({id:Math.floor(100000 + Math.random() * 900000),email,password});
     console.log("Body",body)
-    return this.http.post(this.baseURL + 'users', body,{'headers':headers})
+    return this.http.get<any>(this.baseURL + 'users')
+  }
+
+  public isAuthenticated(): boolean {
+    const token = sessionStorage.getItem('token');
+    // Check whether the token is expired and return
+    // true or false
+    console.log("Token ",token);
+    
+    return !!(token && token!=='');
   }
 }

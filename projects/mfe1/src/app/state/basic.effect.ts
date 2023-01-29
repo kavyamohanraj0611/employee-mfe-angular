@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { Router } from "@angular/router";
+import { act, Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { catchError, from, map, mergeMap, of, switchMap, withLatestFrom } from "rxjs";
 
@@ -11,7 +12,7 @@ import { getAllBasicDetailState } from "./basic.selector";
 @Injectable()
 
 export class basicDetailsEffect {
-    constructor(private actions$: Actions, private basicDetailService: BasicDetailsService,private store:Store) { }
+    constructor(private actions$: Actions, private basicDetailService: BasicDetailsService,private store:Store,private router:Router) { }
     loadBasicDetails$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(loadBasicDetails),
@@ -22,14 +23,6 @@ export class basicDetailsEffect {
                     catchError((error)=>of(loadBasicDetails_failure({error})))
                 )
                 
-                // return this.basicDetailService.addEmployeeBasic(action.basicDetails)
-                //     .pipe(map((data: employeeBasic) => {
-                //         console.log("effect ", data);
-                //         const employee=data;
-                //         // this.basicDetailService.addEmployeeBasic(employee);
-                //         // this.router.navigate(['/home']).then(()=>window.location.reload());
-                //         return loadBasicDetails_success({basicDetails:[data]});
-                //     }))
             }));
     });
 
@@ -37,9 +30,16 @@ export class basicDetailsEffect {
         ()=>
         this.actions$.pipe(
             ofType(addBasicDetails),
-            withLatestFrom(this.store.select(getAllBasicDetailState)),
-            switchMap(([action,basicDetails])=>from(this.basicDetailService.addEmployeeBasic(basicDetails)))
+            mergeMap((action) => {
+                return this.basicDetailService.addEmployeeBasic({id:action.id, employeeName:action.employeeName,employeeDepartment:action.employeeDepartment,employeeEmail:action.employeeEmail,employeePhoneNumber:action.employeePhoneNumber})
+                    .pipe(map((data: any) => {
+                        console.log("effect ", data);
+                        this.router.navigate(['/basic/details'])
+                    }))
+            })
+
         ),
+        
     {dispatch:false}
     )
 }
