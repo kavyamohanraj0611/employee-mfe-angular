@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BasicDetailsService } from '../basic-details.service';
+import { basicFormGroup } from '../basicdetails/basicFormGroup';
 import { addBasicDetails, loadBasicDetails } from '../state/basic.action';
 
 
@@ -14,16 +15,15 @@ export class BasicDetailsComponent {
   employeeForm:FormGroup|any
 
   constructor(private formBuilder:FormBuilder,private basicDetailService:BasicDetailsService, private store:Store) { 
-    this.employeeForm = this.formBuilder.group({
-      id:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z0-9]{1,10}$')]),
-      employeeName:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z ]{1,15}$')]),
-      employeeDepartment:new FormControl('',[Validators.required]),
-      employeeEmail:new FormControl('',[Validators.required,Validators.pattern('^[a-z0-9\.]{4,18}@[a-z]+\.[a-z\.]{2,6}$')]),
-      employeePhoneNumber:new FormControl('',[Validators.required,Validators.pattern('^[6-9]{1}[0-9]{9}$')])
+    this.employeeForm = new FormGroup<basicFormGroup>({
+      id:new FormControl<string>('',{ nonNullable: true ,validators:[Validators.required,Validators.pattern('^(ACE)[0-9]{4}$')]}),
+      employeeName:new FormControl<string>('',{ nonNullable: true ,validators:[Validators.required,Validators.pattern('^[a-zA-Z ]{1,15}$')]}),
+      employeeDepartment:new FormControl<string>('',{ nonNullable: true ,validators:[Validators.required]}),
+      employeeEmail:new FormControl<string>('',{ nonNullable: true ,validators:[Validators.required,Validators.pattern('^[a-z0-9\.]{4,18}@[a-z]+\.[a-z\.]{2,6}$')]}),
+      employeePhoneNumber:new FormControl<number>(0,{ nonNullable: true ,validators:[Validators.required,Validators.pattern('^[6-9]{1}[0-9]{9}$')]})
     });
   }
-  ngOnInit(): void {    
-  }
+  ngOnInit(): void {}
 
   register(employeeForm:FormGroup){
    console.log("Form ",employeeForm.value);

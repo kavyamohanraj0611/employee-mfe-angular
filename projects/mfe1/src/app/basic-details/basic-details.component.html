@@ -14,8 +14,8 @@
                 *ngIf="employeeForm.controls['id'].invalid && (employeeForm.controls['id'].dirty || employeeForm.controls['id'].touched)">
                 <span *ngIf="employeeForm.controls['id'].errors.required"><small class="text-danger">Employee Id is
                         required</small></span>
-                <span *ngIf="employeeForm.controls['id'].errors.pattern"><small class="text-danger">Employee Id must
-                        contain only alphabets and numbers</small></span>
+                <span *ngIf="employeeForm.controls['id'].errors.pattern"><small class="text-danger">Employee Id must start with ACE followed by
+                    4 digits</small></span>
             </div>
         </div>
         <div class="mb-3">

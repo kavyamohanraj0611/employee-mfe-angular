@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { loginStart } from '../state/login.action';
 import { UserService } from '../user.service';
+import { loginFormGroup } from './loginFormGroup';
 
 @Component({
   selector: 'app-login',
@@ -14,15 +15,15 @@ export class LoginComponent {
   loginForm!:FormGroup;
 
   constructor(private form:FormBuilder,private userService:UserService,private router:Router,private store:Store){
-    this.loginForm=this.form.group({
-      userEmail:new FormControl('',[Validators.required,Validators.pattern('^[a-z0-9\.]{4,18}@[a-z]+\.[a-z\.]{2,6}$')]),
-      password:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z0-9!@#$%^&*+]{8,}$'),Validators.minLength(8)])
+    this.loginForm=new FormGroup<loginFormGroup>({
+      userEmail:new FormControl<string>('',{ nonNullable: true ,validators:[Validators.required,Validators.pattern('^[a-z0-9\.]{4,18}@[a-z]+\.[a-z\.]{2,6}$')]}),
+      password:new FormControl<string>('',{ nonNullable: true ,validators:[Validators.required,Validators.pattern('^[a-zA-Z0-9!@#$%^&*+]{8,}$'),Validators.minLength(8)]})
     })
   }
 
   ngOnInit(){
     if (this.userService.isAuthenticated()) {
-      this.router.navigate([''])
+      this.router.navigate(['/'])
     }
   }
 

@@ -29,10 +29,10 @@ module.exports = {
         library: { type: "module" },
 
         // For remotes (please adjust)
-        name: "mfe2",
+        name: "projectDetails",
         filename: "remoteEntry.js",
         exposes: {
-            './Module': './projects/mfe2/src/app/project-detail/project-detail.module.ts',
+            './projectDetailsModule': './projects/mfe2/src/app/project-detail/project-detail.module.ts',
         },        
         
         // For hosts (please adjust)

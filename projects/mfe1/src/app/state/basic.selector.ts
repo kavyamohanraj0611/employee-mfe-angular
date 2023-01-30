@@ -6,5 +6,5 @@ export const getBasicDetailState = (state:any)=>state;
 
 export const getAllBasicDetailState = createSelector(getBasicDetailState, (state) => {
     console.log(state)
-    return state.basicDetails;
+    return state.basicDetails.basicDetails;
 });

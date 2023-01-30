@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthService } from 'projects/auth/src/public-api';
 import { HomeComponent } from './home/home.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path:'',
     redirectTo:'home',

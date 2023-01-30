@@ -12,8 +12,8 @@
                 placeholder="Enter employee Id">
             <span *ngIf="id.hasError('required') && id.touched" class="text-danger"><small>Employee Id is
                     required</small></span>
-            <span *ngIf="id.hasError('pattern')" class="text-danger"><small>Employee Id must contain
-                    only alphabets and numbers</small></span>
+            <span *ngIf="id.hasError('pattern')" class="text-danger"><small>mployee Id must start with ACE followed by
+                4 digits</small></span>
         </div>
         <div class="mb-3">
             <label class="mb-2"><b>Name*</b></label>

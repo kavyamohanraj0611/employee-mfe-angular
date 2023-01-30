@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { projectFormGroup } from '../project-detail/projectFormGroup';
 import { ProjectDetailsService } from '../project-details.service';
 import { addprojectDetails } from '../state/project.action';
 
@@ -13,12 +14,12 @@ export class ProjectDetailsComponent {
   employeeProjectForm:FormGroup|any
 
   constructor(private formBuilder:FormBuilder,private projectDetailService:ProjectDetailsService,private store:Store) { 
-    this.employeeProjectForm = this.formBuilder.group({
-      id:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z0-9]{1,10}$')]),
-      employeeName:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z ]{1,15}$')]),
-      projectName:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z ]{1,}$')]),
-      projectDescription:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z0-9!@#$%^&*)(;:,._<>/? ]{5,200}$'),Validators.minLength(5),Validators.maxLength(200)]),
-      managerName:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z ]{1,15}$')])
+    this.employeeProjectForm = new FormGroup<projectFormGroup>({
+      id:new FormControl<string>('',{ nonNullable: true ,validators:[Validators.required,Validators.pattern('^(ACE)[0-9]{4}$')]}),
+      employeeName:new FormControl<string>('',{ nonNullable: true ,validators:[Validators.required,Validators.pattern('^[a-zA-Z ]{1,15}$')]}),
+      projectName:new FormControl<string>('',{ nonNullable: true ,validators:[Validators.required,Validators.pattern('^[a-zA-Z ]{1,}$')]}),
+      projectDescription:new FormControl<string>('',{ nonNullable: true ,validators:[Validators.required,Validators.pattern('^[a-zA-Z0-9!@#$%^&*)(;:,._<>/? ]{5,200}$'),Validators.minLength(5),Validators.maxLength(200)]}),
+      managerName:new FormControl<string>('',{ nonNullable: true ,validators:[Validators.required,Validators.pattern('^[a-zA-Z ]{1,15}$')]})
     });
   }
   ngOnInit(): void {
