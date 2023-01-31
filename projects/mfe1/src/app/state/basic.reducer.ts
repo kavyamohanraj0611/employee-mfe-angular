@@ -23,8 +23,6 @@ export const initialState: BasicDetailState = {
 export const basicDetailReducer = createReducer(
     initialState,
     on(addBasicDetails, (state, {id,employeeName,employeeDepartment,employeeEmail,employeePhoneNumber}) => {
-        console.log("reducer state",state)
-        console.log("reducer action")
         return {    
             id:id,
             employeeName:employeeName,
@@ -34,14 +32,12 @@ export const basicDetailReducer = createReducer(
         }
     }),
     on(loadBasicDetails,(state)=>{
-        console.log("Load ",state);
         return {
             ...state,
             status:'loading'
         }
     }),
     on(loadBasicDetails_success,(state,{basicDetails})=>{
-        console.log("Success ",basicDetails);
         return {
             ...state,
             basicDetails

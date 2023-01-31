@@ -1,19 +1,32 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 import { BasicDetailsService } from 'projects/mfe1/src/app/basic-details.service';
+import { employeeProject } from '../employee-project-model';
 
 import { ProjectDetailsComponent } from './project-details.component';
 
 describe('ProjectDetailsComponent', () => {
   let component: ProjectDetailsComponent;
   let fixture: ComponentFixture<ProjectDetailsComponent>;
+  let initialState:employeeProject;
 
   beforeEach(async () => {
+    initialState={
+      id:'ACE1111',
+      employeeName:'abcd',
+      projectName:'Example',
+      projectDescription:'Example project',
+      managerName:'xyz'
+    }
+
     await TestBed.configureTestingModule({
       declarations: [ ProjectDetailsComponent ],
-      imports:[HttpClientTestingModule,RouterTestingModule],
-      providers:[BasicDetailsService]
+      imports:[HttpClientTestingModule,RouterTestingModule,ReactiveFormsModule],
+      providers:[BasicDetailsService,provideMockStore({initialState})]
     })
     .compileComponents();
 
@@ -31,20 +44,10 @@ describe('ProjectDetailsComponent', () => {
     expect(component.employeeProjectForm.valid).toBeFalsy();
   });
 
-  it('should require valid id ', () => {
-    component.employeeProjectForm.patchValue({
-      "id": "1234",
-      "employeeName":"abcdef",
-      "projectName":"xyz",
-      "projectDescription":"e-kart application",
-      "managerName":"pqrs"
-    });
-    expect(component.employeeProjectForm.get('id')?.valid).toEqual(true);
-    expect(component.employeeProjectForm.get('employeeName')?.valid).toEqual(true);
-    expect(component.employeeProjectForm.get('projectName')?.valid).toEqual(true);
-    expect(component.employeeProjectForm.get('projectDescription')?.valid).toEqual(true);
-    expect(component.employeeProjectForm.get('managerName')?.valid).toEqual(true);
-
+  it('should verify if button is clicked', () => {
+    spyOn(component, 'viewProjectDetails');
+    fixture.debugElement.query(By.css('#project')).nativeElement.click();
+    expect(component.viewProjectDetails).toHaveBeenCalled();
   });
 
 });

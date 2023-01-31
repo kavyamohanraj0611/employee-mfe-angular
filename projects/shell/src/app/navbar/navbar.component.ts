@@ -17,23 +17,17 @@ export class NavbarComponent implements OnInit{
     if(this.userService.isAuthenticated()){
       this.loggedIn=true
       this.userName=sessionStorage.getItem('username')
-      console.log("Eeee ",this.userName);
     }
     else{
       this.loggedIn=false
     }
-    console.log("LoggedIn ",this.loggedIn);
   }
 
   logout(){
-    if(window.confirm("Are you sure to logout")){
     sessionStorage.removeItem('token')
     sessionStorage.removeItem('username')
     this.router.navigate(['/login']).then(()=>window.location.reload())
-    console.log("Location ",this.location.path());
-
     this.loggedIn=false
-    }
   }
 
 }

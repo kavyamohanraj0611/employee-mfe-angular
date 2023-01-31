@@ -25,6 +25,7 @@ export class loginEffects {
                         if(user){
                             sessionStorage.setItem('token', user.id);
                             sessionStorage.setItem('username', user.name);
+                            sessionStorage.setItem('email', user.email);
                             this.router.navigate(['/basic/details'])
                             .then(()=>window.location.reload());
                             return loginSuccess({ user });

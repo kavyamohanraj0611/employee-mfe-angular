@@ -10,7 +10,7 @@
         </select>
     </form>
     <div class="float-end my-3">
-        <button type="button" class="btn btn-success " routerLink="/basic/form1">Add Basic Detail</button>
+        <button type="button" class="btn btn-success "  routerLink="basic/form1">Add Basic Detail</button>
     </div>
     <table class="table table-striped table-hover bg-gradient ">
         <thead class="text-uppercase">
@@ -18,7 +18,6 @@
                 <th colspan="7"><span>Basic Details</span></th>
             </tr>
             <tr>           
-              <!-- <th *ngFor="let data of header | keyvalue">{{(data.key)}}</th> -->
               <th>Id</th>
               <th>Employee Name</th>
               <th>Department</th>
@@ -28,8 +27,7 @@
           </thead>
           <ng-container *ngIf="filterForm.get('dept')?.value==='';else noFilter">
             <tbody *ngIf="details$ | async as detail">
-              <tr *ngFor="let item of detail | paginate: { itemsPerPage: 5, currentPage: page, totalItems: detail?.length }"> 
-                <!-- <td *ngFor="let data of item | keyvalue">{{data.value}}</td> -->
+              <tr *ngFor="let item of detail "> 
                 <td>{{item.id}}</td>
                 <td>{{item.employeeName}}</td>
                 <td>{{item.employeeDepartment}}</td>
@@ -41,7 +39,6 @@
           <ng-template #noFilter>
             <tbody>
               <tr *ngFor="let item of details | paginate: { itemsPerPage: 5, currentPage: page, totalItems: details?.length }"> 
-                <!-- <td *ngFor="let data of item | keyvalue">{{data.value}}</td> -->
                 <td>{{item.id}}</td>
                 <td>{{item.employeeName}}</td>
                 <td>{{item.employeeDepartment}}</td>

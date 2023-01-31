@@ -1,5 +1,5 @@
 <div class="float-start mt-2 ms-4">
-    <button type="button" class="btn btn-success mb-5" routerLink="/project/details">View project Detail</button>
+    <button type="button" id="project" class="btn btn-success mb-5" (click)="viewProjectDetails()">View project Detail</button>
 </div>
 <div class="container border border-2 p-2 mt-5">
     <form [formGroup]="employeeProjectForm">

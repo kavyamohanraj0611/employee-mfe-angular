@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { projectFormGroup } from '../project-detail/projectFormGroup';
 import { ProjectDetailsService } from '../project-details.service';
@@ -13,7 +14,7 @@ import { addprojectDetails } from '../state/project.action';
 export class ProjectDetailsComponent {
   employeeProjectForm:FormGroup|any
 
-  constructor(private formBuilder:FormBuilder,private projectDetailService:ProjectDetailsService,private store:Store) { 
+  constructor(private formBuilder:FormBuilder,private projectDetailService:ProjectDetailsService,private store:Store,private router:Router) { 
     this.employeeProjectForm = new FormGroup<projectFormGroup>({
       id:new FormControl<string>('',{ nonNullable: true ,validators:[Validators.required,Validators.pattern('^(ACE)[0-9]{4}$')]}),
       employeeName:new FormControl<string>('',{ nonNullable: true ,validators:[Validators.required,Validators.pattern('^[a-zA-Z ]{1,15}$')]}),
@@ -34,6 +35,10 @@ export class ProjectDetailsComponent {
   //     })      
       this.store.dispatch(addprojectDetails(employeeProjectForm.value));
       
+  }
+
+  viewProjectDetails(){
+    this.router.navigate(['/project/details'])
   }
 
   get id(){

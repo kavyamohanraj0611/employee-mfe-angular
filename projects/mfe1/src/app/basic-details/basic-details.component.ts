@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BasicDetailsService } from '../basic-details.service';
 import { basicFormGroup } from '../basicdetails/basicFormGroup';
@@ -14,7 +15,7 @@ import { addBasicDetails, loadBasicDetails } from '../state/basic.action';
 export class BasicDetailsComponent {
   employeeForm:FormGroup|any
 
-  constructor(private formBuilder:FormBuilder,private basicDetailService:BasicDetailsService, private store:Store) { 
+  constructor(private formBuilder:FormBuilder,private basicDetailService:BasicDetailsService, private store:Store,private router:Router) { 
     this.employeeForm = new FormGroup<basicFormGroup>({
       id:new FormControl<string>('',{ nonNullable: true ,validators:[Validators.required,Validators.pattern('^(ACE)[0-9]{4}$')]}),
       employeeName:new FormControl<string>('',{ nonNullable: true ,validators:[Validators.required,Validators.pattern('^[a-zA-Z ]{1,15}$')]}),
@@ -25,30 +26,17 @@ export class BasicDetailsComponent {
   }
   ngOnInit(): void {}
 
-  register(employeeForm:FormGroup){
-   console.log("Form ",employeeForm.value);
+  register(){
     // this.basicDetailService.addEmployeeBasic(employeeForm.value)
     //   .subscribe(data => {
     //     console.log("Data ",data)
     //     employeeForm.reset()
     //   }) 
-      this.store.dispatch(addBasicDetails(employeeForm.value))
+      this.store.dispatch(addBasicDetails(this.employeeForm.value))
   }
 
-  get id(){
-    return this.employeeForm.get('id')
-  }
-  get employeeName(){
-    return this.employeeForm.get('employeeName')
-  }
-  get employeeDepartment(){
-    return this.employeeForm.get('employeeDepartment')
-  }
-  get employeeEmail(){
-    return this.employeeForm.get('employeeEmail')
-  }
-  get employeePhoneNumber(){
-     return this.employeeForm.get('employeePhoneNumber')
+  viewAllDetails(){
+    this.router.navigate(['/basic/details'])
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { employeeBasic } from '../employee-basic-model';
@@ -20,7 +21,7 @@ export class TableComponent implements OnInit {
   filterForm!: FormGroup;
   page: any;
   allDetails!: employeeBasic[];
-  constructor(private store: Store) {
+  constructor(private store: Store,private router:Router) {
     this.filterForm = new FormGroup<filterFormGroup>({
       dept: new FormControl<string>('',{nonNullable:true})
     })
@@ -60,6 +61,7 @@ export class TableComponent implements OnInit {
         this.details = this.details.filter((data) => value === data.employeeDepartment)
         console.log("Details ", this.details);
         this.page=1
+        
         }
         
       })

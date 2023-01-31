@@ -20,7 +20,7 @@ export const routes: Routes = [
     loadChildren: () => loadRemoteModule({
       type: 'module',
       remoteEntry: "http://localhost:4300/remoteEntry.js",
-      exposedModule: './Module'
+      exposedModule: './basicDetailsModule'
     })
     .then((m) => m.BasicdetailsModule),
     canActivate:[AuthService]
@@ -30,7 +30,7 @@ export const routes: Routes = [
     loadChildren: () => loadRemoteModule({
         type: 'module',
         remoteEntry: "http://localhost:4400/remoteEntry.js",
-        exposedModule: './Module',
+        exposedModule: './projectDetailsModule',
       })
       .then((m) => m.ProjectDetailModule),
       canActivate:[AuthService]
@@ -40,7 +40,7 @@ export const routes: Routes = [
     loadChildren: () => loadRemoteModule({
         type: 'module',
         remoteEntry: "http://localhost:4500/remoteEntry.js",
-        exposedModule: './Module',
+        exposedModule: './loginModule',
       })
       .then((m) => m.LoginModule),
   },

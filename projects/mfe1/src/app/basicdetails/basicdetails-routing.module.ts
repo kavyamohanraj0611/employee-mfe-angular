@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BasicDetailsComponent } from '../basic-details/basic-details.component';
 import { TableComponent } from '../table/table.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     redirectTo: 'details',

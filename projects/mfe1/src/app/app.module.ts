@@ -16,6 +16,7 @@ import { environment } from '../environments/environment';
 import { ReducerManager } from '@ngrx/store';
 import { ReducerManagerDispatcher } from '@ngrx/store';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     EffectsModule.forRoot([]),
     BasicdetailsModule,
     NgxPaginationModule,
+    MaterialModule
     
   ],
   providers: [ReducerManager],

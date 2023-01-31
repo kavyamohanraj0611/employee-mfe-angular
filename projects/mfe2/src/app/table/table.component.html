@@ -17,7 +17,7 @@
       </tr>
     </thead>
     <tbody *ngIf="details$ | async as detail">
-      <tr *ngFor="let item of detail | paginate: { itemsPerPage: 5, currentPage: page, totalItems: detail?.length }">
+      <tr *ngFor="let item of detail ">
         <!-- <td *ngFor="let data of item | keyvalue">{{data.value}}</td> -->
         <td>{{item.id}}</td>
         <td>{{item.employeeName}}</td>
