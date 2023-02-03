@@ -1,24 +1,22 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { basicDetailReducer } from '../state/basic.reducer';
-import { MockStore, provideMockStore} from '@ngrx/store/testing';
+import { provideMockStore} from '@ngrx/store/testing';
 
 import { TableComponent } from './table.component';
 import { BasicDetailsService } from '../basic-details.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ReactiveFormsModule } from '@angular/forms';
 import { employeeBasic } from '../employee-basic-model';
-import { loadBasicDetails } from '../state/basic.action';
-import { StoreModule } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { routes } from '../basicdetails/basicdetails-routing.module';
+import { By } from '@angular/platform-browser';
+import { Store } from '@ngrx/store';
 
 describe('TableComponent', () => {
   let component: TableComponent;
   let fixture: ComponentFixture<TableComponent>;
-  let store:MockStore;
   let service: BasicDetailsService;
   let fakeData:employeeBasic ={
     "id": "ACE9876",
@@ -30,6 +28,8 @@ describe('TableComponent', () => {
   let router:Router;
   let location:Location
   let initialState:employeeBasic;
+  let store:Store
+
   beforeEach(async () => {
     initialState={
       id:'ACE00001',
@@ -40,7 +40,7 @@ describe('TableComponent', () => {
     }
     await TestBed.configureTestingModule({
       declarations: [ TableComponent ],
-      imports:[HttpClientTestingModule,RouterTestingModule.withRoutes(routes),NgxPaginationModule,ReactiveFormsModule,StoreModule.forRoot({basic:basicDetailReducer})],
+      imports:[HttpClientTestingModule,RouterTestingModule.withRoutes(routes),NgxPaginationModule,ReactiveFormsModule],
       providers:[provideMockStore({initialState})]
     })
     .compileComponents();
@@ -48,28 +48,49 @@ describe('TableComponent', () => {
     fixture = TestBed.createComponent(TableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    store = TestBed.inject(MockStore);
     router=TestBed.inject(Router);
-    location=TestBed.inject(Location)    
+    location=TestBed.inject(Location)   
+    store=TestBed.inject(Store) 
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should verify if button is clicked', () => {
-  //   spyOn(component, 'addBasicDetail');
-  //   let button = fixture.debugElement.nativeElement.querySelector('button');
-  //   button.click();
-  //   component.addBasicDetail();
-  //   expect(component.addBasicDetail).toHaveBeenCalled();
-  // });
+  it('should verify if filter button is clicked', () => {
+    spyOn(component, 'filter');
+    let button = fixture.debugElement.nativeElement.querySelector('button');
+    button.click();
+    component.filter();
+    expect(component.filter).toHaveBeenCalled();
+  });
 
-  // it('should navigate to details form on button click',fakeAsync(()=>{
-  //   component.addBasicDetail()
-  //   tick();
-  //   router.navigate(['/form1'])
-  //   expect(location.path()).toEqual('/form1')
-  // }))
+  it('should emit on change for filter', () => {
+    component.filterForm.get('dept')?.patchValue("Sales");
+    fixture.detectChanges();
+    spyOn(component,'filter')
+    const select = fixture.debugElement.query(By.css('select')).nativeElement;
+    select.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+    expect(component.filter).toHaveBeenCalled();
+  });
+
+  it('should verify if filter button is clicked', fakeAsync(() => {
+    const filter=spyOn(component, 'filter').and.stub()
+    component.filter();
+    expect(filter).toHaveBeenCalled()
+    tick()
+    fixture.whenStable().then(()=>{
+      expect(component.page).toBe(1)
+    })
+  }));
+
+  it('should call filter method on changing the select input',fakeAsync(()=>{
+        spyOn(component,'filter').and.callThrough()
+        component.filter()
+        expect(spyOn(component,'filter')).toHaveBeenCalled()
+    // expect(component.page).toBe(1)
+  }))
+
 });
 

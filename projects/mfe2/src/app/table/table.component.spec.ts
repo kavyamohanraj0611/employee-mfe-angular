@@ -1,9 +1,12 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { provideMockStore } from '@ngrx/store/testing';
+import { Store } from '@ngrx/store';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { loadBasicDetails } from 'projects/mfe1/src/app/state/basic.action';
 import { employeeProject } from '../employee-project-model';
+import { ProjectDetailState } from '../state/project.reducer';
 
 import { TableComponent } from './table.component';
 
@@ -11,6 +14,7 @@ describe('TableComponent', () => {
   let component: TableComponent;
   let fixture: ComponentFixture<TableComponent>;
   let initialState:employeeProject
+  let store:Store<ProjectDetailState>;
 
   beforeEach(async () => {
     initialState={
@@ -31,9 +35,18 @@ describe('TableComponent', () => {
     fixture = TestBed.createComponent(TableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    store = TestBed.inject(Store);
+
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('add method should dispatch add action', fakeAsync(() => {
+  //   spyOn(component,'ngOnInit').and.callThrough()
+  //   tick();
+  //   expect(store.dispatch).toHaveBeenCalledWith(loadBasicDetails());
+  // }));
+
 });

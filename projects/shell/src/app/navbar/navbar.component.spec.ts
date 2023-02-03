@@ -22,16 +22,16 @@ describe('NavbarComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [NavbarComponent],
       imports: [HttpClientTestingModule, RouterTestingModule.withRoutes(routes)],
-      providers: [UserService]
+      providers: []
     })
       .compileComponents();
 
     fixture = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture.detectChanges()
+    service=TestBed.inject(UserService)
     router=TestBed.inject(Router);
     location=TestBed.inject(Location)
-    service=TestBed.inject(UserService)
 
     let store: any = {};
     const mockSessionStorage = {
@@ -63,34 +63,34 @@ describe('NavbarComponent', () => {
     expect(component.loggedIn).toBeFalsy();
   });
 
-  // it('should go to basic url on clicking view basic details button',
-  //  fakeAsync ( () => {
-  //     let fixture = TestBed.createComponent(NavbarComponent);
-  //     fixture.detectChanges();
+  it('should go to basic url on clicking view basic details button',
+   fakeAsync ( () => {
+      let fixture = TestBed.createComponent(NavbarComponent);
+      fixture.detectChanges();
 
-  //     fixture.debugElement.query(By.css('#basic')).nativeElement.click();
+      fixture.debugElement.query(By.css('#basic')).nativeElement.click();
 
-  //     let href = fixture.debugElement.query(By.css('#basic')).nativeElement
-  //       .getAttribute('routerLink');
-  //       tick()
-  //     expect(href).toEqual('/basic');
-  //   }));
+      let href = fixture.debugElement.query(By.css('#basic')).nativeElement
+        .getAttribute('routerLink');
+        tick()
+      expect(href).toEqual('/basic');
+    }));
 
-  // it('should go to project url on clicking view project details button',
-  //   fakeAsync(( () => {
-  //     let fixture = TestBed.createComponent(NavbarComponent);
-  //     fixture.detectChanges();
+  it('should go to project url on clicking view project details button',
+    fakeAsync(( () => {
+      let fixture = TestBed.createComponent(NavbarComponent);
+      fixture.detectChanges();
 
-  //     fixture.debugElement.query(By.css('#project')).nativeElement.click();
-  //     let href = fixture.debugElement.query(By.css('#project')).nativeElement
-  //       .getAttribute('routerLink');
-  //       tick();
-  //     expect(href).toEqual('/project');
-  //   })));
+      fixture.debugElement.query(By.css('#project')).nativeElement.click();
+      let href = fixture.debugElement.query(By.css('#project')).nativeElement
+        .getAttribute('routerLink');
+        tick();
+      expect(href).toEqual('/project');
+    })));
 
   it('should remove the token in sessionStorage on logout',
   ()=>{
-    spyOn(component, 'logout');
+    spyOn(component, 'logout'); 
     component.logout();
     expect(sessionStorage.removeItem('token')).toBeUndefined();
     expect(sessionStorage.getItem('token')).toBeNull();
@@ -109,8 +109,8 @@ describe('NavbarComponent', () => {
     spyOn(service,'isAuthenticated').and.returnValue(true)
     component.ngOnInit()
     tick();
-    expect(component.loggedIn).toBeTrue();
-  }))
+    expect(component.loggedIn).toBeTrue(); 
+  })) 
 
 
 

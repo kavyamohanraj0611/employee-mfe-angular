@@ -46,26 +46,15 @@ export class TableComponent implements OnInit {
     //     this.header = this.details[0];
     //   }
     // })
-
   }
 
   filter() {
-    const value = this.filterForm.get("dept")?.value
-
     this.store.dispatch(loadBasicDetails())
-      this.store.select(getAllBasicDetailState).subscribe((data)=>{
-        console.log("Dataaaa ",data);
-        this.details = data
-        if(this.details){
-        if(value)
-        this.details = this.details.filter((data) => value === data.employeeDepartment)
-        console.log("Details ", this.details);
+      this.store.select(getAllBasicDetailState).subscribe((data1)=>{
+        this.details = data1.filter((data:any) => this.filterForm.get("dept")?.value === data.employeeDepartment)
         this.page=1
-        
         }
-        
-      })
-
+      )
 
     // this.details = []
     // const detail = from(this.allDetails)

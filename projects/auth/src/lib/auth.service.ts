@@ -12,7 +12,7 @@ export class AuthService {
     const token = sessionStorage.getItem('token')
     console.log("Innnnn");
     
-    if (!token || token==='') {
+    if (!token) {
       this.router.navigate(['login']);
       console.log("Not allowed");
       alert("Please login to continue")

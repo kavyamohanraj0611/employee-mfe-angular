@@ -21,7 +21,6 @@ export class UserService {
   public isAuthenticated(): boolean {
     const token = sessionStorage.getItem('token');
     console.log("Token ",token);
-    
     return !!(token);
   }
 }

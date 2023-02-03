@@ -27,16 +27,12 @@ export class BasicDetailsComponent {
   ngOnInit(): void {}
 
   register(){
-    // this.basicDetailService.addEmployeeBasic(employeeForm.value)
+    // this.basicDetailService.addEmployeeBasic(this.employeeForm.value)
     //   .subscribe(data => {
     //     console.log("Data ",data)
-    //     employeeForm.reset()
+    //     this.employeeForm.reset()
     //   }) 
       this.store.dispatch(addBasicDetails(this.employeeForm.value))
-  }
-
-  viewAllDetails(){
-    this.router.navigate(['/basic/details'])
   }
 
 }

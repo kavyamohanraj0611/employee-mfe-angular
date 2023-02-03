@@ -23,14 +23,15 @@ describe('AppComponent', () => {
         AppComponent,
         NavbarComponent
       ],
-      providers:[UserService]
+      providers:[UserService],
+      
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     router=TestBed.inject(Router);
-    location=TestBed.inject(Location)
+    location=TestBed.inject(Location);
   });
 
   it('should create the app', () => {
@@ -56,4 +57,7 @@ describe('AppComponent', () => {
     tick(); 
     expect(location.path()).toBe('/home');
   }));
+  
+
+  
 });
