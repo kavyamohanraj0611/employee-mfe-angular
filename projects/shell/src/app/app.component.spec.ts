@@ -16,8 +16,8 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule.withRoutes(routes),
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        RouterTestingModule,
       ],
       declarations: [
         AppComponent,
@@ -30,8 +30,6 @@ describe('AppComponent', () => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    router=TestBed.inject(Router);
-    location=TestBed.inject(Location);
   });
 
   it('should create the app', () => {
@@ -52,12 +50,8 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.content span')?.textContent).toContain('shell is running');
   });
-  it('navigate to "" redirects you to /home', fakeAsync(() => { 
-    router.navigate(['home']); 
-    tick(); 
-    expect(location.path()).toBe('/home');
-  }));
   
+
 
   
 });

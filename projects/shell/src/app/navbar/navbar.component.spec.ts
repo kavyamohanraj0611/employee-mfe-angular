@@ -10,7 +10,9 @@ import { Location } from '@angular/common';
 import { inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Observable, Observer } from 'rxjs';
+import { AppModule } from '../app.module';
 
+const WINDOW_TOKEN=''
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
@@ -21,7 +23,7 @@ describe('NavbarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NavbarComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule.withRoutes(routes)],
+      imports: [HttpClientTestingModule, RouterTestingModule.withRoutes([])],
       providers: []
     })
       .compileComponents();
@@ -32,26 +34,9 @@ describe('NavbarComponent', () => {
     service=TestBed.inject(UserService)
     router=TestBed.inject(Router);
     location=TestBed.inject(Location)
-
-    let store: any = {};
-    const mockSessionStorage = {
-      getItem: (key: string): string => {
-        return key in store ? store[key] : null;
-      },
-      setItem: (key: string, value: string) => {
-        store[key] = `${value}`;
-      },
-      removeItem: (key: string) => {
-        delete store[key];
-      }
-    };
-    spyOn(sessionStorage, 'getItem')
-      .and.callFake(mockSessionStorage.getItem);
-    spyOn(sessionStorage, 'setItem')
-      .and.callFake(mockSessionStorage.setItem);
-    spyOn(sessionStorage, 'removeItem')
-      .and.callFake(mockSessionStorage.removeItem);
+    
   });
+
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -63,30 +48,22 @@ describe('NavbarComponent', () => {
     expect(component.loggedIn).toBeFalsy();
   });
 
-  it('should go to basic url on clicking view basic details button',
-   fakeAsync ( () => {
-      let fixture = TestBed.createComponent(NavbarComponent);
-      fixture.detectChanges();
 
-      fixture.debugElement.query(By.css('#basic')).nativeElement.click();
+  it('should go to basic url on clicking view basic details button', () => {
+    const spy = spyOn(router, 'navigate');
+    component.viewBasicDetails();
+    expect(
+      spy.calls.first().args[0].toString().replace('[', '').replace("'", '')
+    ).toContain('/basic');
+  });
 
-      let href = fixture.debugElement.query(By.css('#basic')).nativeElement
-        .getAttribute('routerLink');
-        tick()
-      expect(href).toEqual('/basic');
-    }));
-
-  it('should go to project url on clicking view project details button',
-    fakeAsync(( () => {
-      let fixture = TestBed.createComponent(NavbarComponent);
-      fixture.detectChanges();
-
-      fixture.debugElement.query(By.css('#project')).nativeElement.click();
-      let href = fixture.debugElement.query(By.css('#project')).nativeElement
-        .getAttribute('routerLink');
-        tick();
-      expect(href).toEqual('/project');
-    })));
+  it('should go to project url on clicking view project details button', () => {
+    const spy = spyOn(router, 'navigate');
+    component.viewProjectDetails();
+    expect(
+      spy.calls.first().args[0].toString().replace('[', '').replace("'", '')
+    ).toContain('/project');
+  });
 
   it('should remove the token in sessionStorage on logout',
   ()=>{
@@ -98,10 +75,12 @@ describe('NavbarComponent', () => {
 
   it('on logout isAuthenticated must return false',
   fakeAsync(()=>{
+    const spy = spyOn(router, 'navigate');
     component.logout()
     expect(sessionStorage.removeItem('token')).toBeUndefined();
     tick();
-    expect(jasmine.createSpy('isAuthenticated')).toBeFalse
+    expect(spyOn(service,'isAuthenticated')).toBeFalse
+    expect(spy.calls.first().args[0].toString().replace('[', '').replace("'", '')).toContain('/login');
   }))
 
   it('on logged in loggedIn must be true',

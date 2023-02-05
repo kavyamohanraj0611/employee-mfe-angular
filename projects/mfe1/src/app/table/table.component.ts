@@ -48,10 +48,10 @@ export class TableComponent implements OnInit {
     // })
   }
 
-  filter() {
+  onFilter() {
     this.store.dispatch(loadBasicDetails())
-      this.store.select(getAllBasicDetailState).subscribe((data1)=>{
-        this.details = data1.filter((data:any) => this.filterForm.get("dept")?.value === data.employeeDepartment)
+      this.store.select(getAllBasicDetailState).subscribe((data1:employeeBasic[])=>{
+        this.details = data1?.filter((data:any) => this.filterForm.get("dept")?.value === data.employeeDepartment)
         this.page=1
         }
       )

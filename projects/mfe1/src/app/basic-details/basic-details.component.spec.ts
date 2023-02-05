@@ -58,12 +58,14 @@ describe('BasicDetailsComponent', () => {
     expect(component.employeeForm.valid).toBeFalsy();
   });
 
-  // it('should navigate to details form on button click',fakeAsync(()=>{
-  //   component.viewAllDetails()
-  //   tick();
-  //   router.navigate(['/basic/details'])
-  //   expect(location.path()).toEqual('/basic/details')
-  // }))
+  it('should navigate to details form on button click', () => {
+    const spy = spyOn(router, 'navigate');
+    component.viewAllDetails();
+    expect(
+      spy.calls.first().args[0].toString().replace('[', '').replace("'", '')
+    ).toContain('/basic/details');
+  });
+
 
   it('should call register if submit button is clicked', fakeAsync(() => {
     spyOn(component, 'register').and.callFake

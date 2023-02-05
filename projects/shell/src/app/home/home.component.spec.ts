@@ -1,30 +1,31 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { Location } from '@angular/common';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { routes } from '../app-routing.module';
+import { AppRoutingModule, routes } from '../app-routing.module';
+import { AppModule } from 'projects/mfe1/src/app/app.module';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let location: Location
-  let router:Router
+  let router: Router
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HomeComponent],
-      imports: [RouterTestingModule.withRoutes(routes)]
+      imports: [RouterTestingModule.withRoutes([])]
     })
       .compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    location=TestBed.inject(Location)
-    router=TestBed.inject(Router)
+    location = TestBed.inject(Location)
+    router = TestBed.inject(Router)
     router.initialNavigation();
   });
 
@@ -32,32 +33,26 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('navigate to "" redirects you to /home', fakeAsync(() => { 
-    router.navigate(['']); 
-    tick(); 
-    expect(location.path()).toBe('/home');
+  it('navigate to "" redirects you to /home', fakeAsync(() => {
+    router.navigate(['']);
+    tick();
+    expect(location.path()).toBe('/');
   }));
 
-  // it('should go to basic url  on clicking basic details button',
-  //   fakeAsync(() => {
-  //     let fixture = TestBed.createComponent(HomeComponent);
-  //     fixture.detectChanges();
+  it('should go to basic url  on clicking basic details button', () => {
+    const spy = spyOn(router, 'navigate');
+    component.viewEmployeeBasic();
+    expect(
+      spy.calls.first().args[0].toString().replace('[', '').replace("'", '')
+    ).toContain('/basic');
+  });
 
-  //     fixture.debugElement.query(By.css('#basic')).nativeElement.click();
-  //     let href = fixture.debugElement.query(By.css('#basic')).nativeElement
-  //       .getAttribute('routerLink');
-  //     expect(href).toEqual('/basic');
-  //   }));
+  it('should go to project url on clicking project details button', () => {
+    const spy = spyOn(router, 'navigate');
+    component.viewEmployeeProject();
+    expect(
+      spy.calls.first().args[0].toString().replace('[', '').replace("'", '')
+    ).toContain('/project');
+  });
 
-  // it('should go to project url on clicking project details button',
-  //   fakeAsync(() => {
-  //     let fixture = TestBed.createComponent(HomeComponent);
-  //     fixture.detectChanges();
-
-  //     fixture.debugElement.query(By.css('#project')).nativeElement.click();
-
-  //     let href = fixture.debugElement.query(By.css('#project')).nativeElement
-  //       .getAttribute('routerLink');
-  //     expect(href).toEqual('/project');
-  //   }));
 });

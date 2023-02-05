@@ -5,5 +5,5 @@ import { AppState } from "./basic.state";
 export const getBasicDetailState = (state:any)=>state;
 
 export const getAllBasicDetailState = createSelector(getBasicDetailState, (state) => {
-    return state.basicDetails.basicDetails;
+    return state.basicDetails?.basicDetails;
 });

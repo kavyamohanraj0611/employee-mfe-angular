@@ -1,7 +1,7 @@
 <div class="mt-5 w-75 text-center container">
     <form class="float-start" [formGroup]="filterForm">
         <label class="me-2 fw-bold">Department : </label>
-        <select id="dept" formControlName="dept" (change)="filter()">
+        <select id="dept" formControlName="dept" (change)="onFilter()">
             <option value="">Select an option</option>
             <option value="Development">Development</option>
             <option value="Testing">Testing</option>
@@ -38,7 +38,8 @@
           </ng-container>
           <ng-template #noFilter>
             <tbody>
-              <tr *ngFor="let item of details | paginate: { itemsPerPage: 5, currentPage: page, totalItems: details?.length }"> 
+              <tr *ngFor="let item of details "> 
+                <!-- | paginate: { itemsPerPage: 5, currentPage: page, totalItems: details?.length } -->
                 <td>{{item.id}}</td>
                 <td>{{item.employeeName}}</td>
                 <td>{{item.employeeDepartment}}</td>
@@ -49,6 +50,6 @@
           </ng-template>
           
     </table>
-		<pagination-controls (pageChange)="page = $event"  ></pagination-controls>
+		<!-- <pagination-controls (pageChange)="page = $event"  ></pagination-controls> -->
 
 </div>

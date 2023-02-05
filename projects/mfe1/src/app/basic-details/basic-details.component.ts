@@ -35,4 +35,8 @@ export class BasicDetailsComponent {
       this.store.dispatch(addBasicDetails(this.employeeForm.value))
   }
 
+  viewAllDetails(){
+    this.router.navigate(['/basic/details'])
+  }
+
 }

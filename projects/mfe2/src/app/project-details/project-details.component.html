@@ -44,7 +44,7 @@
             <span *ngIf="managerName.hasError('pattern')" class="text-danger"><small>Name must only contains alphabets</small></span>
         </div>
         <div class="text-center">
-            <button type="submit" class="btn btn-primary mt-3" (click)="register(employeeProjectForm)" [disabled]="employeeProjectForm.invalid">Submit</button>
+            <button type="submit" class="btn btn-primary mt-3" (click)="register()" [disabled]="employeeProjectForm.invalid">Submit</button>
         </div>
     </form>
 </div>

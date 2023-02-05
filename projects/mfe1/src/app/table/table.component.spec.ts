@@ -18,13 +18,13 @@ describe('TableComponent', () => {
   let component: TableComponent;
   let fixture: ComponentFixture<TableComponent>;
   let service: BasicDetailsService;
-  let fakeData:employeeBasic ={
-    "id": "ACE9876",
-    "employeeName": "abc",
-    "employeeDepartment": "def",
+  let fakeData:employeeBasic[] =[{
+    "id": "ACE1000",
+    "employeeName": "ABCD",
+    "employeeDepartment": "Testing",
     "employeeEmail": "abcd@gmail.com",
     "employeePhoneNumber": 9876543210,
-  }
+  }]
   let router:Router;
   let location:Location
   let initialState:employeeBasic;
@@ -40,7 +40,7 @@ describe('TableComponent', () => {
     }
     await TestBed.configureTestingModule({
       declarations: [ TableComponent ],
-      imports:[HttpClientTestingModule,RouterTestingModule.withRoutes(routes),NgxPaginationModule,ReactiveFormsModule],
+      imports:[HttpClientTestingModule,RouterTestingModule.withRoutes([]),NgxPaginationModule,ReactiveFormsModule],
       providers:[provideMockStore({initialState})]
     })
     .compileComponents();
@@ -58,39 +58,40 @@ describe('TableComponent', () => {
   });
 
   it('should verify if filter button is clicked', () => {
-    spyOn(component, 'filter');
+    spyOn(component, 'onFilter');
     let button = fixture.debugElement.nativeElement.querySelector('button');
     button.click();
-    component.filter();
-    expect(component.filter).toHaveBeenCalled();
+    component.onFilter();
+    expect(component.onFilter).toHaveBeenCalled();
   });
 
   it('should emit on change for filter', () => {
     component.filterForm.get('dept')?.patchValue("Sales");
     fixture.detectChanges();
-    spyOn(component,'filter')
+    spyOn(component,'onFilter')
     const select = fixture.debugElement.query(By.css('select')).nativeElement;
     select.dispatchEvent(new Event('change'));
     fixture.detectChanges();
-    expect(component.filter).toHaveBeenCalled();
+    expect(component.onFilter).toHaveBeenCalled();
   });
 
-  it('should verify if filter button is clicked', fakeAsync(() => {
-    const filter=spyOn(component, 'filter').and.stub()
-    component.filter();
-    expect(filter).toHaveBeenCalled()
+  it('filter method should filter the employee based on department', fakeAsync(() => {
+    component.onFilter();
+    spyOn(component, 'onFilter').and.callThrough()
     tick()
-    fixture.whenStable().then(()=>{
-      expect(component.page).toBe(1)
-    })
+    expect(fakeData.filter((basicDetails:employeeBasic) => basicDetails.employeeDepartment === 'Testing')).toEqual([
+      {
+        id: 'ACE1000',
+        employeeName: 'ABCD',
+        employeeDepartment:'Testing',
+        employeeEmail:'abcd@gmail.com',
+        employeePhoneNumber: 9876543210,
+      },
+    ]);
+    component.onFilter();
+    expect(component.onFilter).toHaveBeenCalled();
   }));
 
-  it('should call filter method on changing the select input',fakeAsync(()=>{
-        spyOn(component,'filter').and.callThrough()
-        component.filter()
-        expect(spyOn(component,'filter')).toHaveBeenCalled()
-    // expect(component.page).toBe(1)
-  }))
 
 });
 

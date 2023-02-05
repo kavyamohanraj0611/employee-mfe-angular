@@ -2,6 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { Route, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { BasicDetailsService } from 'projects/mfe1/src/app/basic-details.service';
@@ -13,6 +14,14 @@ describe('ProjectDetailsComponent', () => {
   let component: ProjectDetailsComponent;
   let fixture: ComponentFixture<ProjectDetailsComponent>;
   let initialState:employeeProject;
+  let router:Router
+  let fakeData:employeeProject={
+      'id':'ACE1111',
+      'employeeName':'abcd',
+      'projectName':'Example',
+      'projectDescription':'Example project',
+      'managerName':'xyz'
+  }
 
   beforeEach(async () => {
     initialState={
@@ -30,6 +39,7 @@ describe('ProjectDetailsComponent', () => {
     })
     .compileComponents();
 
+    router=TestBed.inject(Router)
     fixture = TestBed.createComponent(ProjectDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -48,6 +58,14 @@ describe('ProjectDetailsComponent', () => {
     spyOn(component, 'viewProjectDetails');
     fixture.debugElement.query(By.css('#project')).nativeElement.click();
     expect(component.viewProjectDetails).toHaveBeenCalled();
+  });
+
+  it('should navigate to details form on button click', () => {
+    const spy = spyOn(router, 'navigate');
+    component.viewProjectDetails();
+    expect(
+      spy.calls.first().args[0].toString().replace('[', '').replace("'", '')
+    ).toContain('/project/details');
   });
 
 });

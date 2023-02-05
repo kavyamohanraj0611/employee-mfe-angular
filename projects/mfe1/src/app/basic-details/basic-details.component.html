@@ -1,5 +1,5 @@
 <div class="float-start m-3">
-    <button type="button" class="btn btn-success " id="details" routerLink="/basic/details">View Basic Detail</button>
+    <button type="button" class="btn btn-success " id="details" (click)="viewAllDetails()">View Basic Detail</button>
 </div>
 <div class="container border border-2 p-2 mt-5">
     <form [formGroup]="employeeForm">
@@ -59,7 +59,7 @@
             <span *ngIf="employeeForm.controls['employeePhoneNumber'].hasError('required') && employeeForm.controls['employeePhoneNumber'].touched"
                 class="text-danger"><small>Phone
                     number is required</small></span>
-            <span *ngIf="employeeForm.controls['employeePhoneNumber'].hasError('pattern')" class="text-danger"><small>Invalid phone
+            <span *ngIf="employeeForm.controls['employeePhoneNumber'].hasError('pattern') && employeeForm.controls['employeePhoneNumber'].touched" class="text-danger"><small>Invalid phone
                     number</small></span>
         </div>
         <div class="text-center">

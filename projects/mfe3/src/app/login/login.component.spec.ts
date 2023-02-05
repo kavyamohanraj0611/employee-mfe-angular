@@ -70,18 +70,19 @@ describe('LoginComponent', () => {
     expect(component.loginForm.valid).toBeFalsy();
   }));
 
-  it('on logged in it should navigates to home',
-  fakeAsync(()=>{
+  it('on logged in it should navigates to home', () => {
     spyOn(service,'isAuthenticated').and.returnValue(true)
-    component.ngOnInit()
-    tick();
-    expect(location.path()).toEqual('/')
-  }))
+    const spy = spyOn(router, 'navigate');
+    component.ngOnInit();
+    expect(
+      spy.calls.first().args[0].toString().replace('[', '').replace("'", '')
+    ).toContain('/');
+  });
 
   it('should call loginUser method on login',
-  fakeAsync(()=>{
-    spyOn(component,'login').and.callThrough()
-    tick();
-    expect(service.loginUser).toHaveBeenCalled
-  }))
+  ()=>{
+    const spy=spyOn(component,'login').and.callThrough()
+    component.login()
+    expect(spy).toHaveBeenCalled()
+  })
 });

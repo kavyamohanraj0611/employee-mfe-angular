@@ -26,14 +26,13 @@ export class ProjectDetailsComponent {
   ngOnInit(): void {
   }
 
-  register(employeeProjectForm:FormGroup){
-   console.log("Form ",employeeProjectForm.value);  
+  register(){ 
   //  this.projectDetailService.addEmployeeProject(employeeProjectForm.value)
   //     .subscribe(data => {
   //       console.log("Data ",data)
   //       employeeProjectForm.reset()
   //     })      
-      this.store.dispatch(addprojectDetails(employeeProjectForm.value));
+      this.store.dispatch(addprojectDetails(this.employeeProjectForm.value));
       
   }
 
